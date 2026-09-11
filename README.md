@@ -11,25 +11,26 @@ SA Research OS is built around reproducible research, explicit observation-time 
 - Factor research and experiment tracking with bounded trial budgets
 - Statistical validation including HAC/Newey-West inference, FDR control, block bootstrap and Deflated Sharpe
 - Cost-aware multi-market research and reproducible research artifacts
-- Explicit validation states instead of collapsing missing evidence into zero
+- Exchange-aware calendar semantics and explicit validation states
 
 ## Open engineering modules
 
-This repository contains runnable modules from the production research codebase that demonstrate the system's engineering style:
+This repository contains runnable modules from the research system that demonstrate its implementation style:
 
 ```text
 alpha_research_os/
-  research/statistics.py     auditable statistical inference primitives
-  validation/hash.py        deterministic artifact hashing
-  validation/io.py          bounded validation I/O
-  validation/reporting.py   machine-readable validation state contract
+  datasets/cn/trading_calendar.py   verified A-share session semantics
+  research/statistics.py            auditable statistical inference primitives
+  validation/hash.py                deterministic artifact hashing
+  validation/io.py                  bounded validation I/O
+  validation/reporting.py           machine-readable validation state contract
 
 tests/
-  research/                 research-statistics regression tests
-  validation/               hash/reporting contract tests
+  research/                          calendar/statistics regression tests
+  validation/                        hash/reporting contract tests
 ```
 
-The statistical layer keeps assumptions explicit: sample size, annualization, lag selection, trial count and resampling parameters are caller-owned inputs rather than hidden defaults.
+The statistical layer keeps assumptions explicit: sample size, annualization, lag selection, trial count and resampling parameters are caller-owned inputs rather than hidden defaults. The calendar layer fails closed outside verified coverage instead of silently approximating exchange sessions.
 
 ## Quick start
 
